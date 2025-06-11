@@ -1,25 +1,21 @@
 import React from 'react'
 import { ArrowRight, BarChart2, Clock, Sparkles } from 'lucide-react'
-import { useNavigationStore } from '@/features/navigation/state'
-import { useChatStore } from '@/features/chat/state'
-import type { View } from '@/shared/types'
+import { useFrame } from '@artifact/client/hooks'
 
-const HomeView: React.FC = () => {
-  const setCurrentView = useNavigationStore((state) => state.setCurrentView)
-  const navigateTo = useChatStore((state) => state.navigateTo)
+type HomeViewProps = {
+  name?: string
+}
 
-  const handleNavigate = (view: View, title: string, icon: string) => {
-    setCurrentView(view)
-    navigateTo({
-      title,
-      icon,
-      view
-    })
+const HomeView: React.FC<HomeViewProps> = ({ name }) => {
+  const { onMessage } = useFrame()
+
+  const handleNavigate = (view: string) => {
+    onMessage?.({ type: 'navigate', data: view })
   }
 
   return (
     <div className="animate-fadeIn">
-      <h1 className="text-3xl font-bold mb-2">Welcome back</h1>
+      <h1 className="text-3xl font-bold mb-2">{`Welcome back${name ? `, ${name}` : ''}`}</h1>
       <p className="text-gray-600 mb-8">
         Here's an overview of your recent activity and suggestions.
       </p>
@@ -60,7 +56,7 @@ const HomeView: React.FC = () => {
 
           <button
             className="flex items-center text-blue-500 hover:text-blue-700 text-sm font-medium"
-            onClick={() => handleNavigate('chats', 'Chats', 'MessageSquare')}
+            onClick={() => handleNavigate('chats')}
           >
             View all chats
             <ArrowRight size={14} className="ml-1" />
@@ -109,7 +105,7 @@ const HomeView: React.FC = () => {
           <div className="space-y-3">
             <button
               className="w-full flex items-center p-2 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
-              onClick={() => handleNavigate('weather', 'Weather', 'Weather')}
+              onClick={() => handleNavigate('weather')}
             >
               <span className="mr-2">🌤️</span>
               <span className="text-sm">Check today's weather</span>
@@ -117,7 +113,7 @@ const HomeView: React.FC = () => {
 
             <button
               className="w-full flex items-center p-2 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
-              onClick={() => handleNavigate('customers', 'Customers', 'Users')}
+              onClick={() => handleNavigate('customers')}
             >
               <span className="mr-2">👥</span>
               <span className="text-sm">View customer list</span>
