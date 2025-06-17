@@ -14,7 +14,7 @@ const HomeView: React.FC<HomeViewProps> = ({ name }) => {
   }
 
   return (
-    <div className="animate-fadeIn">
+    <div className="p-6 animate-fadeIn">
       <h1 className="text-3xl font-bold mb-2">{`Welcome back${name ? `, ${name}` : ''}`}</h1>
       <p className="text-gray-600 mb-8">
         Here's an overview of your recent activity and suggestions.
