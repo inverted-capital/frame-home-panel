@@ -1,8 +1,8 @@
 # starter-widget
 
-This repo demonstrates a minimal setup for building an Artifact widget. It loads
-and saves a custom `profile.json` file checked against a Zod schema. If the file
-is missing a default one is written automatically.
+This repo demonstrates a minimal setup for building an Artifact widget. It
+reads a custom `profile.json` file checked against a Zod schema to display a
+personalized welcome.
 
 ## Development
 
@@ -29,5 +29,4 @@ export const accountDataSchema = z.object({
 })
 ```
 
-The widget exposes a single input that edits this value and saves it back to
-`profile.json`.
+The widget reads this file to display the user's name at runtime.
