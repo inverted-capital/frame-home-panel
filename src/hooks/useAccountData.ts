@@ -1,5 +1,4 @@
 import { useExists, useJson } from '@artifact/client/hooks'
-import { accountDataSchema, type AccountData } from '../types/account.ts'
 import { useEffect, useState } from 'react'
 
 const useAccountData = () => {
@@ -9,7 +8,13 @@ const useAccountData = () => {
 
   useEffect(() => {
     if (raw !== undefined) {
-      setData(accountDataSchema.parse(raw))
+      if ('user' in raw) {
+        if ('name' in raw.user) {
+          setData({
+            name: raw.user.name
+          })
+        }
+      }
     }
   }, [raw])
 
