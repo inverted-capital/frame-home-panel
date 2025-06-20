@@ -25,7 +25,9 @@ The profile data is defined in `src/types/account.ts`:
 
 ```ts
 export const accountDataSchema = z.object({
-  name: z.string()
+  user: z.object({
+    name: z.string()
+  })
 })
 ```
 
