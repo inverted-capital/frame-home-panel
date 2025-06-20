@@ -6,5 +6,5 @@ export default function App() {
 
   if (loading) return <p>Loading...</p>
 
-  return <HomeView name={data?.name} />
+  return <HomeView name={data?.user.name} />
 }

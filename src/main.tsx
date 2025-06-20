@@ -7,7 +7,9 @@ import type { AccountData } from './types/account'
 import './index.css'
 
 const mockProfile: AccountData = {
-  name: 'Jane Doe'
+  user: {
+    name: 'Jane Doe'
+  }
 }
 
 createRoot(document.getElementById('root')!).render(
